@@ -2,8 +2,10 @@ import Navigation from './components/navigation';
 import Filter from './components/filter';
 import CalendarHeader from './components/calendarHeader';
 import Calendar from './components/calendar';
+import { getDaysInCalendarMonth } from './utils';
 
 function App() {
+  console.table(getDaysInCalendarMonth());
   return (
     <div className='items-center'>
       <div className='grid grid-cols-10 gap-3 max-w-7xl'>
