@@ -9,7 +9,7 @@ interface Props {
 }
 
 function CalendarDay({ day }: Props) {
-  return <div className='calendar-cell'>{day.format('dddd').toUpperCase()}</div>;
+  return <h5 className='calendar-cell'>{day.format('dddd').toUpperCase()}</h5>;
 }
 
 export default function Calendar() {

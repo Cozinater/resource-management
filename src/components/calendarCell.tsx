@@ -12,7 +12,7 @@ export default function CalendarCell({ day }: Props) {
   };
   return (
     <div className='calendar-cell'>
-      <div className={`${getCurrentDayClass()}`}>{day.format('DD')}</div>
+      <h5 className={`${getCurrentDayClass()}`}>{day.format('DD')}</h5>
     </div>
   );
 }
