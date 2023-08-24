@@ -2,10 +2,13 @@ import Navigation from './components/navigation';
 import Filter from './components/filter';
 import CalendarHeader from './components/calendarHeader';
 import Calendar from './components/calendar';
-import { getDaysInCalendarMonth } from './utils';
+import { useContext } from 'react';
+import GlobalContext from './context/globalContext';
 
 function App() {
-  console.table(getDaysInCalendarMonth());
+  const { monthIndex } = useContext(GlobalContext);
+  console.log('App: ', monthIndex);
+
   return (
     <div className='items-center'>
       <div className='grid grid-cols-10 gap-3 max-w-7xl h-screen'>
