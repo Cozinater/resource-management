@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
-import CalendarCells from './calendarCells';
+import CalendarCell from './calendarCell';
 import { getDaysInCalendarMonth } from '../utils';
+
+import dayjs from 'dayjs';
+
+interface Props {
+  day: dayjs.Dayjs;
+}
+
+function CalendarDay({ day }: Props) {
+  return <div className='calendar-cell'>{day.format('dddd').toUpperCase()}</div>;
+}
 
 export default function Calendar() {
   const [curMonth, setCurMonth] = useState(getDaysInCalendarMonth());
@@ -12,8 +22,15 @@ export default function Calendar() {
   }, [monthIndex]);
 
   return (
-    <div className='flex-1 grid grid-cols-7 grid-rows-5'>
-      {curMonth.map((week, i) => week.map((day, idx) => <CalendarCells day={day} key={idx} rowIdx={i} />))}
-    </div>
+    <>
+      <header className='grid grid-cols-7 text-gray-700 '>
+        {curMonth[0].map((day) => (
+          <CalendarDay day={day} />
+        ))}
+      </header>
+      <div className='h-full grid grid-cols-7 grid-rows-5 text-gray-700'>
+        {curMonth.map((week, i) => week.map((day, idx) => <CalendarCell day={day} key={idx} />))}
+      </div>
+    </>
   );
 }
