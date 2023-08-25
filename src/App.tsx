@@ -6,8 +6,8 @@ import { useContext } from 'react';
 import GlobalContext from './context/globalContext';
 
 function App() {
-  const { monthIndex } = useContext(GlobalContext);
-  console.log('App: ', monthIndex);
+  const { monthYearIndex } = useContext(GlobalContext);
+  console.log('App: ', monthYearIndex);
 
   return (
     <div className='items-center'>

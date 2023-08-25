@@ -9,23 +9,27 @@ interface CalendarDayProps {
 }
 
 function CalendarDay({ day }: CalendarDayProps) {
-  return <h5 className='calendar-cell'>{day.format('dddd').toUpperCase()}</h5>;
+  return <h5>{day.format('dddd').toUpperCase()}</h5>;
 }
 
 export default function Calendar() {
-  const { monthIndex } = useContext(GlobalContext);
-  const curMonth = getDaysInCalendarMonth(monthIndex);
-  console.log('Calendar: ', monthIndex);
+  const { monthYearIndex } = useContext(GlobalContext);
+  const daysInCalendarMonth = getDaysInCalendarMonth(monthYearIndex.month, monthYearIndex.year);
+  console.log('Calendar: ', monthYearIndex);
+
+  const getNoOfRowsForCalendarMonth = () => {
+    return `grid-rows-${daysInCalendarMonth[0].length}`;
+  };
 
   return (
     <>
       <header className='grid grid-cols-7 text-gray-700 '>
-        {curMonth[0].map((day, i) => (
+        {daysInCalendarMonth[0].map((day, i) => (
           <CalendarDay day={day} key={i} />
         ))}
       </header>
-      <div className='h-full grid grid-cols-7 grid-rows-5 text-gray-700'>
-        {curMonth.map((week) => week.map((day, idx) => <CalendarCell day={day} key={idx} />))}
+      <div className={`h-full grid grid-cols-7 text-gray-700 ${getNoOfRowsForCalendarMonth()}`}>
+        {daysInCalendarMonth.map((week) => week.map((day, idx) => <CalendarCell day={day} key={idx} />))}
       </div>
     </>
   );

@@ -7,13 +7,15 @@ interface ContextWrapperProps {
 }
 
 export default function ContextWrapper({ children }: ContextWrapperProps) {
-  const [monthIndex, setMonthIndex] = useState(dayjs().month()); // Stores the current month
+  const curMonth = dayjs().month();
+  const curYear = dayjs().year();
+  const [monthYearIndex, setMonthYearIndex] = useState({ month: curMonth, year: curYear }); // Stores the current month & Year
 
   return (
     <GlobalContext.Provider
       value={{
-        monthIndex,
-        setMonthIndex,
+        monthYearIndex,
+        setMonthYearIndex,
       }}
     >
       {children}
