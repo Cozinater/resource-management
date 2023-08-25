@@ -10,9 +10,9 @@ function App() {
   console.log('App: ', monthYearIndex);
 
   return (
-    <div className='items-center'>
-      <div className='grid grid-cols-10 gap-3 max-w-7xl h-screen'>
-        <div className='bg-blue-100 col-span-3'>
+    <div className='items-center box-border'>
+      <div className='grid grid-cols-9 gap-3 max-w-7xl h-screen p-3 '>
+        <div className='col-span-2'>
           <Navigation />
           <Filter />
         </div>

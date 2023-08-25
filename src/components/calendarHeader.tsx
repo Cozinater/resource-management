@@ -12,7 +12,7 @@ export default function CalendarHeader() {
   function onClickNextMonth() {
     setMonthYearIndex({ ...monthYearIndex, month: monthYearIndex.month + 1 });
   }
-  console.log('CalendarHeader: ', setMonthYearIndex);
+
   return (
     <div className='flex flex-row gap-1 p-3 items-center'>
       <Button icon='pi pi-arrow-circle-left' onClick={onClickPrevMonth} />

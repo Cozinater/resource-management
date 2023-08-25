@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import CalendarCell from './calendarCell';
-import { getDaysInCalendarMonth } from '../utils';
+import { getDaysInCalendarMonth } from '../utils/utils';
 import GlobalContext from '../context/globalContext';
 import dayjs from 'dayjs';
 
