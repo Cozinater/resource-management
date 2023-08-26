@@ -15,6 +15,7 @@ export default function Navigation() {
   function onClickPrevMonth() {
     setYearIndex(yearIndex - 1);
   }
+
   function onClickNextMonth() {
     setYearIndex(yearIndex + 1);
   }
@@ -24,43 +25,56 @@ export default function Navigation() {
     setSelectedMonthIndex(selectedMonthIndex);
   }
 
-  const getSelectedMonth = (monthIndex: number, element: string) => {
-    if (element === 'text') {
-      return monthIndex === selectedMonthIndex ? 'text-green-500' : '';
+  const getSelectedMonth = (monthIndex: number, ele: string) => {
+    //TODO change to switch statement
+    if (ele === 'text') {
+      return monthIndex === selectedMonthIndex &&
+        dayjs(new Date(monthYearIndex.year, monthYearIndex.month, 1)).isSame(
+          new Date(yearIndex, selectedMonthIndex, 1),
+          'year'
+        )
+        ? 'text-green-500'
+        : '';
     } else {
-      return monthIndex === selectedMonthIndex ? 'border-green-500 border' : '';
+      return monthIndex === selectedMonthIndex &&
+        dayjs(new Date(monthYearIndex.year, monthYearIndex.month, 1)).isSame(
+          new Date(yearIndex, selectedMonthIndex, 1),
+          'year'
+        )
+        ? 'border-green-500 border'
+        : '';
     }
   };
 
   return (
     <div className='grid gap-3 calendar-cell p-3 text-gray-700'>
-      <header className='bg-gray-200 grid grid-cols-3 ' style={{ gridTemplateColumns: '1fr auto 1fr' }}>
+      <div className='bg-gray-200 grid grid-cols-3 ' style={{ gridTemplateColumns: '1fr auto 1fr' }}>
         <Button icon='pi pi-caret-left' onClick={onClickPrevMonth} />
         <h5>{yearIndex}</h5>
         <Button icon='pi pi-caret-right' onClick={onClickNextMonth} />
-      </header>
-      <body className='grid grid-cols-3 grid-rows-4'>
+      </div>
+      <div className='grid grid-cols-3 grid-rows-4'>
         {monthsArray.map((month, i) => {
           return (
-            <Button className={`w-full ${getSelectedMonth(i, 'button')}`} onClick={() => onClickMonth(i)}>
+            <Button key={i} className={`w-full ${getSelectedMonth(i, 'button')}`} onClick={() => onClickMonth(i)}>
               <h5 className={`item-center flex justify-center py-1 ${getSelectedMonth(i, 'text')}`}>
                 {month.toUpperCase()}
               </h5>
             </Button>
           );
         })}
-      </body>
-      <footer className='text-black'>
+      </div>
+      <div className='text-black'>
         <h5 className='item-center flex justify-center'>
-          Today is &nbsp;
-          <span className='text-green-500'>
-            <b>{dayjs().format('ddd, MMMM DD')},</b>
-          </span>
+          Today is
+          <div className='text-green-500'>
+            <b>&nbsp;{dayjs().format('ddd, MMMM DD, YYYY')}</b>
+          </div>
         </h5>
-        <h5 className='item-center flex justify-center text-green-500'>
+        {/* <h5 className='item-center flex justify-center text-green-500'>
           <b>{dayjs().format('YYYY')}</b>
-        </h5>
-      </footer>
+        </h5> */}
+      </div>
     </div>
   );
 }

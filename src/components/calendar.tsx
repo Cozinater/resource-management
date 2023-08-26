@@ -13,9 +13,10 @@ function CalendarDay({ day }: CalendarDayProps) {
 }
 
 export default function Calendar() {
-  const { monthYearIndex } = useContext(GlobalContext);
+  const { monthYearIndex, bookingList } = useContext(GlobalContext);
   const daysInCalendarMonth = getDaysInCalendarMonth(monthYearIndex.month, monthYearIndex.year);
   console.log('Calendar: ', monthYearIndex);
+  console.log('Calendar: ', bookingList);
 
   const getNoOfRowsForCalendarMonth = () => {
     return `grid-rows-${daysInCalendarMonth[0].length}`;

@@ -1,4 +1,6 @@
 import dayjs from 'dayjs';
+import { read, utils } from 'xlsx';
+import { Booking } from './interfaces';
 
 export const NO_OF_DAYS_IN_A_WEEK = 7;
 
@@ -40,4 +42,29 @@ export function getDaysInCalendarMonth(month = dayjs().month(), year = dayjs().y
     });
   });
   return daysMatrix;
+}
+
+// Implement the fetching of csv files & converting into json format
+export async function fetchCSVFetcher(url: string): Promise<Booking[]> {
+  return await fetch(url)
+    .then((res) => {
+      /* get the data as a Blob */
+      return res.arrayBuffer();
+    })
+    .then((ab) => {
+      /* parse the data when it is received */
+      const data = new Uint8Array(ab);
+      const workbook = read(data, {
+        type: 'array',
+      });
+
+      /* *****************************************************************
+       * Converting Excel value to Json
+       ********************************************************************/
+      const first_sheet_name = workbook.SheetNames[0];
+      /* Get worksheet */
+      const worksheet = workbook.Sheets[first_sheet_name];
+
+      return utils.sheet_to_json(worksheet, { raw: true });
+    });
 }
