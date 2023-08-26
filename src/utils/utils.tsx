@@ -1,6 +1,18 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { read, utils } from 'xlsx';
-import { Booking } from './interfaces';
+import { BookingObj } from './interfaces';
+
+export interface FetchedBookingObj {
+  code: string;
+  date: string;
+  end_time: string;
+  name: string;
+  start_time: string;
+  status: string;
+  type: string;
+  user_uuid: string;
+  uuid: string;
+}
 
 export const NO_OF_DAYS_IN_A_WEEK = 7;
 
@@ -45,7 +57,7 @@ export function getDaysInCalendarMonth(month = dayjs().month(), year = dayjs().y
 }
 
 // Implement the fetching of csv files & converting into json format
-export async function fetchCSVFetcher(url: string): Promise<Booking[]> {
+export async function fetchCSVFetcher(url: string): Promise<BookingObj[]> {
   return await fetch(url)
     .then((res) => {
       /* get the data as a Blob */
@@ -62,9 +74,24 @@ export async function fetchCSVFetcher(url: string): Promise<Booking[]> {
        * Converting Excel value to Json
        ********************************************************************/
       const first_sheet_name = workbook.SheetNames[0];
+
+      console.log('first_sheet_name :', workbook);
       /* Get worksheet */
       const worksheet = workbook.Sheets[first_sheet_name];
 
-      return utils.sheet_to_json(worksheet, { raw: true });
+      const jsonMeetingsList: FetchedBookingObj[] = utils.sheet_to_json(worksheet, { raw: false });
+
+      /* *****************************************************************
+       * Converting Dates to the valid formats
+       ********************************************************************/
+      return jsonMeetingsList.map((meeting) => {
+        return { ...meeting, date: convertDateToDateObj(meeting.date) };
+      });
     });
 }
+
+export function convertDateToDateObj(dateStr: string): Dayjs {
+  return dayjs(dateStr, 'DD/MM/YYYY');
+}
+
+// Parse out all the types of meeting

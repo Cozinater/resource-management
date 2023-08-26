@@ -2,19 +2,15 @@ import Navigation from './components/navigation';
 import Filter from './components/filter';
 import CalendarHeader from './components/calendarHeader';
 import Calendar from './components/calendar';
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import GlobalContext from './context/globalContext';
 import { useQueries } from '@tanstack/react-query';
 import { fetchCSVFetcher } from './utils/utils';
 import CircularProgress from '@mui/material/CircularProgress';
-import { Booking } from './utils/interfaces';
+import { BookingObj } from './utils/interfaces';
 
 function App() {
   const { monthYearIndex, bookingsList, setBookingsList } = useContext(GlobalContext);
-  // const [tempBookingsList, setTempBookingsList] = useState<any[]>([]);
-  const [curBookingsList, setCurBookingsList] = useState<any[]>([]);
-  // let valueSet = false;
-  // let bookingQueriesList: UseQueryResult<Booking[]>[] = [];
   console.log('App: ', monthYearIndex);
 
   // Fetch Data from CSV files
@@ -55,58 +51,23 @@ function App() {
   }
 
   if (bookingQueriesList.every((bookingQueries) => bookingQueries.status === 'success') && bookingsList.length < 2) {
-    let tempBookingsList: Booking[] = [];
+    let tempBookingsList: BookingObj[] = [];
 
     bookingQueriesList.forEach((bookingQuery) => {
       const { data } = bookingQuery;
-      console.log(data);
       if (data && data.length > 0) {
         tempBookingsList = tempBookingsList.concat(data);
       }
     });
 
     setBookingsList(tempBookingsList);
-    // valueSet = true;
   }
-
-  // function test() {
-  //   bookingQueriesList.forEach((bookingQuery) => {
-  //     const { data } = bookingQuery;
-  //     console.log(data);
-  //     if (data && data.length > 0) {
-  //       setTempBookingsList((tempBookingsList) => [...tempBookingsList, ...data]);
-  //     }
-  //   });
-  // }
-
-  // useEffect(() => {
-  //   test();
-  // }, []);
-  // useEffect(() => {
-
-  // }, []);
-
-  // useEffect(() => {
-  //   if (bookingQueriesList.find((bookingQueries) => bookingQueries.status === 'success')) {
-  //     let tempBookingsList: Booking[] = [];
-
-  //     bookingQueriesList.forEach((bookingQuery) => {
-  //       const { data } = bookingQuery;
-  //       console.log(data);
-  //       if (data && data.length > 0) {
-  //         tempBookingsList = tempBookingsList.concat(data);
-  //       }
-  //     });
-
-  //     setCurBookingsList(tempBookingsList);
-  //   }
-  // }, [bookingQueriesList]);
 
   console.log('bookingsList: ', bookingsList);
 
   return (
     <div className='items-center box-border'>
-      <div className='grid grid-cols-9 gap-3 max-w-7xl h-screen p-3 '>
+      <div className='grid grid-cols-9 gap-3 max-w-screen-2xl min-w-fit h-screen p-3 '>
         <div className='col-span-2'>
           <Navigation />
           <Filter />
