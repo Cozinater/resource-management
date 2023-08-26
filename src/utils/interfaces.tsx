@@ -12,11 +12,11 @@ export interface BookingObj {
   uuid: string;
 }
 
-export interface BookingTypeColors {
-  color: 'bg-red-500' | 'bg-yellow-500' | 'bg-green-500' | 'bg-blue-500' | 'bg-purple-500' | 'bg-pink-500';
-}
+// export interface BookingTypeColors {
+//   color: 'bg-red-500' | 'bg-yellow-500' | 'bg-green-500' | 'bg-blue-500' | 'bg-purple-500' | 'bg-pink-500';
+// }
 
 export interface ColorToBookingTypeMapping {
   bookingType: string;
-  color: BookingTypeColors;
+  color: string;
 }

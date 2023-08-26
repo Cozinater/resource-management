@@ -64,12 +64,10 @@ export default function Navigation() {
           );
         })}
       </div>
-      <div className='text-black'>
-        <h5 className='item-center flex justify-center'>
+      <div className='text-black contents'>
+        <h5 className='mx-auto'>
           Today is
-          <div className='text-green-500'>
-            <b>&nbsp;{dayjs().format('ddd, MMMM DD, YYYY')}</b>
-          </div>
+          <b className='text-green-500'>&nbsp;{dayjs().format('ddd, MMMM DD, YYYY')}</b>
         </h5>
         {/* <h5 className='item-center flex justify-center text-green-500'>
           <b>{dayjs().format('YYYY')}</b>

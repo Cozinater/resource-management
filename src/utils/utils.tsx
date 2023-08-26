@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { read, utils } from 'xlsx';
-import { BookingObj } from './interfaces';
+import { BookingObj, ColorToBookingTypeMapping } from './interfaces';
 
 export interface FetchedBookingObj {
   code: string;
@@ -15,6 +15,17 @@ export interface FetchedBookingObj {
 }
 
 export const NO_OF_DAYS_IN_A_WEEK = 7;
+
+export const MAX_BOOKING_DISPLAY_PER_CELL = 4;
+
+export const BOOKING_COLORS = [
+  'bg-red-500',
+  'bg-yellow-500',
+  'bg-green-500',
+  'bg-blue-500',
+  'bg-purple-500',
+  'bg-pink-500',
+];
 
 // Calculate how many rows is needed to display all of the days in the month
 // For some months 6 rows are required. For other months, 5 roos are sufficient.
@@ -94,4 +105,15 @@ export function convertDateToDateObj(dateStr: string): Dayjs {
   return dayjs(dateStr, 'DD/MM/YYYY');
 }
 
-// Parse out all the types of meeting
+// Parse out all the types of boooking
+export function getUniqueBookingTypes(bookingsList: BookingObj[]): ColorToBookingTypeMapping[] {
+  const uniqueBookingTypes = [...new Set(bookingsList.map((booking) => booking.type))];
+
+  // Map colors with Booking Types
+  return uniqueBookingTypes.map((bookingType, i) => {
+    return {
+      bookingType,
+      color: BOOKING_COLORS[((i % BOOKING_COLORS.length) + BOOKING_COLORS.length) % BOOKING_COLORS.length],
+    };
+  });
+}

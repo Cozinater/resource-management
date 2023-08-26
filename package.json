@@ -13,7 +13,6 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/base": "^5.0.0-beta.12",
-    "@mui/joy": "^5.0.0-beta.3",
     "@mui/material": "^5.14.6",
     "@tanstack/react-query": "^4.33.0",
     "dayjs": "^1.11.9",

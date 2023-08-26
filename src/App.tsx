@@ -5,12 +5,12 @@ import Calendar from './components/calendar';
 import { useContext } from 'react';
 import GlobalContext from './context/globalContext';
 import { useQueries } from '@tanstack/react-query';
-import { fetchCSVFetcher } from './utils/utils';
+import { fetchCSVFetcher, getUniqueBookingTypes } from './utils/utils';
 import CircularProgress from '@mui/material/CircularProgress';
 import { BookingObj } from './utils/interfaces';
 
 function App() {
-  const { monthYearIndex, bookingsList, setBookingsList } = useContext(GlobalContext);
+  const { monthYearIndex, bookingsList, setBookingsList, setColorToBookingTypeMapping } = useContext(GlobalContext);
   console.log('App: ', monthYearIndex);
 
   // Fetch Data from CSV files
@@ -61,13 +61,15 @@ function App() {
     });
 
     setBookingsList(tempBookingsList);
+    setColorToBookingTypeMapping(getUniqueBookingTypes(tempBookingsList));
+    console.log('App_: ', getUniqueBookingTypes(tempBookingsList));
   }
 
   console.log('bookingsList: ', bookingsList);
 
   return (
-    <div className='items-center box-border'>
-      <div className='grid grid-cols-9 gap-3 max-w-screen-2xl min-w-fit h-screen p-3 '>
+    <>
+      <div className='mx-auto grid grid-cols-9 gap-3 max-w-screen-2xl min-w-screen-md h-screen p-3 '>
         <div className='col-span-2'>
           <Navigation />
           <Filter />
@@ -77,7 +79,7 @@ function App() {
           <Calendar />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

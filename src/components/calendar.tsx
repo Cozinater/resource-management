@@ -20,10 +20,6 @@ export default function Calendar() {
 
   // Convert
 
-  const getNoOfRowsForCalendarMonth = () => {
-    return `grid-rows-${daysInCalendarMonth[0].length}`;
-  };
-
   return (
     <>
       <header className='grid grid-cols-7 text-gray-700 '>
@@ -31,7 +27,7 @@ export default function Calendar() {
           <CalendarDay day={day} key={i} />
         ))}
       </header>
-      <div className={`h-full grid grid-cols-7 text-gray-700 ${getNoOfRowsForCalendarMonth()}`}>
+      <div className='h-full grid grid-cols-7 text-gray-700 auto-rows-1fr'>
         {daysInCalendarMonth.map((week) => week.map((day, idx) => <CalendarCell day={day} key={idx} />))}
       </div>
     </>
