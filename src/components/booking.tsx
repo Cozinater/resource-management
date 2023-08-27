@@ -24,8 +24,8 @@ export default function Booking({ booking }: BookibgProps) {
     }
 
     return booking.status === 'CANCELLED'
-      ? `bg-opacity-50 ${colorToBookingType.color} ${textColor}`
-      : `${colorToBookingType.color} ${textColor}`;
+      ? `bg-opacity-50 bg-${colorToBookingType.color} ${textColor}`
+      : `bg-${colorToBookingType.color} ${textColor}`;
   };
 
   const formatBookingStatus = (status: string) => {

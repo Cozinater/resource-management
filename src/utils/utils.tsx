@@ -18,14 +18,7 @@ export const NO_OF_DAYS_IN_A_WEEK = 7;
 
 export const MAX_BOOKING_DISPLAY_PER_CELL = 4;
 
-export const BOOKING_COLORS = [
-  'bg-red-500',
-  'bg-yellow-500',
-  'bg-green-500',
-  'bg-blue-500',
-  'bg-purple-500',
-  'bg-pink-500',
-];
+export const BOOKING_COLORS = ['red-500', 'yellow-500', 'green-500', 'blue-500', 'purple-500', 'pink-500'];
 
 // Calculate how many rows is needed to display all of the days in the month
 // For some months 6 rows are required. For other months, 5 roos are sufficient.

@@ -46,6 +46,7 @@ function App() {
     return <>Error</>;
   }
 
+  // Display a loading spinner while the data is being fetched
   if (bookingQueriesList.find((bookingQueries) => bookingQueries.isLoading)) {
     return (
       <div className='left-1/2 fixed top-1/2 -translate-x-1/2 -translate-y-1/2'>

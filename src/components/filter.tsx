@@ -1,5 +1,5 @@
 import * as Checkbox from '@radix-ui/react-checkbox';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import GlobalContext from '../context/globalContext';
 import { RxCheck } from 'react-icons/rx';
 
@@ -14,12 +14,11 @@ export default function Filter() {
 
   console.log('Filter: ', bookingTypefilterState, bookingStatusfilterState);
 
-  const shadowColor = (bookingType: string) => {
-    // const [colorToBookingType] = colorToBookingTypeMapping.filter((typeMapping) => {
-    //   return typeMapping.bookingType === bookingType;
-    // });
-    // return colorToBookingType.color;
-    return '';
+  const borderColor = (bookingType: string) => {
+    const [colorToBookingType] = colorToBookingTypeMapping.filter((typeMapping) => {
+      return typeMapping.bookingType === bookingType;
+    });
+    return `border-${colorToBookingType.color}`;
   };
 
   const checkedBgColor = (bookingType: string) => {
@@ -27,7 +26,7 @@ export default function Filter() {
       return typeMapping.bookingType === bookingType;
     });
     console.log(colorToBookingType);
-    return 'bg-blue-500';
+    return `bg-${colorToBookingType.color}`;
   };
 
   const handleStatusCheckboxChange = (checkedState: boolean, fieldName: string) => {
@@ -77,7 +76,7 @@ export default function Filter() {
         return (
           <div className='flex items-center'>
             <Checkbox.Root
-              className='hover:bg-gray-100 flex h-5 w-5 items-center justify-center rounded bg-white shadow-no-color text-gray-700'
+              className='hover:bg-gray-100 flex h-5 w-5 items-center justify-center rounded border-2 text-gray-700'
               checked={bookingStatus.checked}
               onCheckedChange={(checked) => handleStatusCheckboxChange(!!checked, bookingStatus.bookingStatusType)}
             >
@@ -85,27 +84,30 @@ export default function Filter() {
                 <RxCheck />
               </Checkbox.Indicator>
             </Checkbox.Root>
-            <h5 className='pl-[15px] leading-none'>{bookingStatus.bookingStatusType}</h5>
+            <h5 className='pl-[10px] leading-none'>{bookingStatus.bookingStatusType}</h5>
           </div>
         );
       })}
 
       <div>Booking Types: </div>
       {bookingTypefilterState.map((bookingType) => {
+        const { bookingStatusType } = bookingType;
         return (
           <div className='flex items-center'>
-            <div className={`${checkedBgColor(bookingType.bookingStatusType)}`}></div>
+            <div className='border-green-500 border-red-500 border-yellow-500 bg-green-500'></div>
             <Checkbox.Root
-              className={`hover:bg-gray-100 flex h-5 w-5 items-center justify-center rounded shadow-no-color  data-[state=checked]:bg-blue-500`}
+              className={`hover:bg-gray-100 flex h-5 w-5 items-center justify-center rounded border-2 ${borderColor(
+                bookingStatusType
+              )} data-[state=checked]:bg-gray-100`}
               checked={bookingType.checked}
               onCheckedChange={(checked) => handleTypeCheckboxChange(!!checked, bookingType.bookingStatusType)}
             >
-              <Checkbox.Indicator className='text-white'>
+              <Checkbox.Indicator className={`${checkedBgColor(bookingStatusType)} text-white`}>
                 <RxCheck />
               </Checkbox.Indicator>
             </Checkbox.Root>
             <label>
-              <h5 className='pl-[15px] leading-none'>{bookingType.bookingStatusType}</h5>
+              <h5 className='pl-[10px] leading-none'>{bookingType.bookingStatusType}</h5>
             </label>
           </div>
         );
