@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { BookingObj, ColorToBookingTypeMapping } from '../utils/interfaces';
+import { BookingObj, ColorToBookingTypeMapping, BookingFilterState } from '../utils/interfaces';
 
 interface MonthYearIndex {
   year: number;
@@ -13,6 +13,10 @@ interface GlobalContext {
   setBookingsList: (bookingsList: BookingObj[]) => void;
   colorToBookingTypeMapping: ColorToBookingTypeMapping[];
   setColorToBookingTypeMapping: (colorToBookingTypeMapping: ColorToBookingTypeMapping[]) => void;
+  bookingTypefilterState: BookingFilterState[];
+  setBookingTypeFilterState: (filterState: BookingFilterState[]) => void;
+  bookingStatusfilterState: BookingFilterState[];
+  setBookingStatusFilterState: (filterState: BookingFilterState[]) => void;
 }
 
 const GlobalContext = createContext<GlobalContext>({
@@ -22,6 +26,10 @@ const GlobalContext = createContext<GlobalContext>({
   setBookingsList: () => {},
   colorToBookingTypeMapping: [],
   setColorToBookingTypeMapping: () => {},
+  bookingTypefilterState: [],
+  setBookingTypeFilterState: () => {},
+  bookingStatusfilterState: [],
+  setBookingStatusFilterState: () => {},
 });
 
 export default GlobalContext;

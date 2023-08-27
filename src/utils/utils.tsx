@@ -1,6 +1,6 @@
 import dayjs, { Dayjs } from 'dayjs';
 import { read, utils } from 'xlsx';
-import { BookingObj, ColorToBookingTypeMapping } from './interfaces';
+import { BookingObj } from './interfaces';
 
 export interface FetchedBookingObj {
   code: string;
@@ -103,17 +103,4 @@ export async function fetchCSVFetcher(url: string): Promise<BookingObj[]> {
 
 export function convertDateToDateObj(dateStr: string): Dayjs {
   return dayjs(dateStr, 'DD/MM/YYYY');
-}
-
-// Parse out all the types of boooking
-export function getUniqueBookingTypes(bookingsList: BookingObj[]): ColorToBookingTypeMapping[] {
-  const uniqueBookingTypes = [...new Set(bookingsList.map((booking) => booking.type))];
-
-  // Map colors with Booking Types
-  return uniqueBookingTypes.map((bookingType, i) => {
-    return {
-      bookingType,
-      color: BOOKING_COLORS[((i % BOOKING_COLORS.length) + BOOKING_COLORS.length) % BOOKING_COLORS.length],
-    };
-  });
 }

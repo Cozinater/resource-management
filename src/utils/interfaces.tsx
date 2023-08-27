@@ -20,3 +20,8 @@ export interface ColorToBookingTypeMapping {
   bookingType: string;
   color: string;
 }
+
+export interface BookingFilterState {
+  bookingStatusType: string;
+  checked: boolean;
+}

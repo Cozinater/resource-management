@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import { Button } from 'primereact/button';
 import GlobalContext from '../context/globalContext';
 import { useContext } from 'react';
+import { BsArrowLeftCircle, BsArrowRightCircle } from 'react-icons/bs';
 
 export default function CalendarHeader() {
   const { monthYearIndex, setMonthYearIndex } = useContext(GlobalContext);
@@ -15,8 +15,12 @@ export default function CalendarHeader() {
 
   return (
     <div className='flex flex-row gap-1 p-3 items-center'>
-      <Button icon='pi pi-arrow-circle-left' onClick={onClickPrevMonth} />
-      <Button icon='pi pi-arrow-circle-right' onClick={onClickNextMonth} />
+      <button onClick={onClickPrevMonth}>
+        <BsArrowLeftCircle />
+      </button>
+      <button onClick={onClickNextMonth}>
+        <BsArrowRightCircle />
+      </button>
       <h2>{dayjs(new Date(monthYearIndex.year, monthYearIndex.month)).format('MMMM YYYY')}</h2>
     </div>
   );

@@ -9,9 +9,38 @@ interface Props {
 }
 
 export default function CalendarCell({ day }: Props) {
-  const { bookingsList } = useContext(GlobalContext);
+  const { bookingsList, bookingStatusfilterState, bookingTypefilterState } = useContext(GlobalContext);
 
-  let bookingsToDisplay = bookingsList.filter((booking) => booking.date.format('DD-MM-YY') === day.format('DD-MM-YY'));
+  const statusToDisplay: string[] = [];
+  const typesToDisplay: string[] = [];
+
+  bookingStatusfilterState.forEach((bookingStatus) => {
+    if (bookingStatus.checked) {
+      statusToDisplay.push(bookingStatus.bookingStatusType);
+    }
+  });
+
+  bookingTypefilterState.forEach((bookingTypes) => {
+    if (bookingTypes.checked) {
+      typesToDisplay.push(bookingTypes.bookingStatusType);
+    }
+  });
+
+  // const checkBookingsToDisplay = (booking) => {
+  //   return {booking.date.format('DD-MM-YY') === day.format('DD-MM-YY')}
+  // }
+
+  let bookingsToDisplay = bookingsList.filter((booking) => {
+    if (
+      booking.date.format('DD-MM-YY') === day.format('DD-MM-YY') &&
+      statusToDisplay.includes(booking.status) &&
+      typesToDisplay.includes(booking.type)
+    ) {
+      return true;
+    }
+  });
+
+  console.log(bookingsToDisplay);
 
   const len = bookingsToDisplay.length;
 

@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import { useContext, useState } from 'react';
 import GlobalContext from '../context/globalContext';
-import { Button } from 'primereact/button';
 import localeData from 'dayjs/plugin/localeData';
+import { RxTriangleLeft, RxTriangleRight } from 'react-icons/rx';
 dayjs.extend(localeData); // use plugin
 
 export default function Navigation() {
@@ -54,16 +54,20 @@ export default function Navigation() {
   return (
     <div className='grid gap-3 shadow-no-color p-3 text-gray-700'>
       <header className='bg-gray-200 grid grid-cols-3 ' style={{ gridTemplateColumns: '1fr auto 1fr' }}>
-        <Button icon='pi pi-caret-left' onClick={onClickPrevMonth} />
+        <button onClick={onClickPrevMonth}>
+          <RxTriangleLeft />
+        </button>
         <h5>{yearIndex}</h5>
-        <Button icon='pi pi-caret-right' onClick={onClickNextMonth} />
+        <button onClick={onClickNextMonth} className='ml-auto'>
+          <RxTriangleRight />
+        </button>
       </header>
       <div className='grid grid-cols-3 grid-rows-4'>
         {monthsArray.map((month, i) => {
           return (
-            <Button key={i} className={`w-full ${selectedButtonColor(i)}`} onClick={() => onClickMonth(i)}>
+            <button key={i} className={`w-full ${selectedButtonColor(i)}`} onClick={() => onClickMonth(i)}>
               <h5 className={`item-center flex justify-center py-1 ${selectedTextColor(i)}`}>{month.toUpperCase()}</h5>
-            </Button>
+            </button>
           );
         })}
       </div>

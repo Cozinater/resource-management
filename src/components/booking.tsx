@@ -38,7 +38,7 @@ export default function Booking({ booking }: BookibgProps) {
 
   if (!booking.type) {
     return (
-      <div className={`mt-0.5 ${getBackgroundTextColor()}`} style={{ width: '-webkit-fill-available' }}>
+      <div className={`${getBackgroundTextColor()}`} style={{ width: '-webkit-fill-available' }}>
         <h5 className='whitespace-nowrap'>{booking.name}</h5>
       </div>
     );

@@ -24,7 +24,7 @@ export default function Calendar() {
           <CalendarDay day={day} key={i} />
         ))}
       </header>
-      <div className='h-full grid grid-cols-7 text-gray-700 auto-rows-1fr'>
+      <div className='pb-1 h-full grid grid-cols-7 text-gray-700 auto-rows-1fr'>
         {daysInCalendarMonth.map((week) => week.map((day, idx) => <CalendarCell day={day} key={idx} />))}
       </div>
     </>
