@@ -13,12 +13,9 @@ function CalendarDay({ day }: CalendarDayProps) {
 }
 
 export default function Calendar() {
-  const { monthYearIndex, bookingsList } = useContext(GlobalContext);
+  const { monthYearIndex } = useContext(GlobalContext);
   const daysInCalendarMonth = getDaysInCalendarMonth(monthYearIndex.month, monthYearIndex.year);
   console.log('Calendar: ', monthYearIndex);
-  console.log('Calendar: ', bookingsList);
-
-  // Convert
 
   return (
     <>

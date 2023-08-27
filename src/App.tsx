@@ -35,8 +35,6 @@ function App() {
     ],
   });
 
-  console.log(bookingQueriesList);
-
   // Handle loading and error
   if (bookingQueriesList.find((bookingQueries) => bookingQueries.error)) {
     return <>Error</>;
@@ -62,10 +60,7 @@ function App() {
 
     setBookingsList(tempBookingsList);
     setColorToBookingTypeMapping(getUniqueBookingTypes(tempBookingsList));
-    console.log('App_: ', getUniqueBookingTypes(tempBookingsList));
   }
-
-  console.log('bookingsList: ', bookingsList);
 
   return (
     <>

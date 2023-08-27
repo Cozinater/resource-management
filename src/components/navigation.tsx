@@ -10,7 +10,7 @@ export default function Navigation() {
   const [yearIndex, setYearIndex] = useState<number>(Number(dayjs().format('YYYY')));
   const [selectedMonthIndex, setSelectedMonthIndex] = useState<number>(monthYearIndex.month);
   const monthsArray = dayjs.monthsShort();
-  console.log(yearIndex);
+  console.log('Navigation', yearIndex);
 
   function onClickPrevMonth() {
     setYearIndex(yearIndex - 1);

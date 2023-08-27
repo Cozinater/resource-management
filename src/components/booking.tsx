@@ -1,7 +1,6 @@
 import { BookingObj } from '../utils/interfaces';
 import { useContext } from 'react';
 import GlobalContext from '../context/globalContext';
-import * as Dialog from '@radix-ui/react-dialog';
 import * as Popover from '@radix-ui/react-popover';
 import { RxCross2 } from 'react-icons/rx';
 
@@ -11,7 +10,7 @@ interface BookibgProps {
 
 export default function Booking({ booking }: BookibgProps) {
   const { colorToBookingTypeMapping } = useContext(GlobalContext);
-  console.log('Booking_: ', colorToBookingTypeMapping);
+  console.log('Booking_: ', booking);
 
   const getBackgroundColor = () => {
     // Dynamically assign a color to a type
@@ -19,8 +18,6 @@ export default function Booking({ booking }: BookibgProps) {
     let [colorToBookingType] = colorToBookingTypeMapping.filter((typeMapping) => {
       return typeMapping.bookingType === booking.type;
     });
-
-    console.log('_Booking_: ', colorToBookingType, booking.type);
     if (!colorToBookingType) {
       colorToBookingType = { color: '', bookingType: '' };
       textColor = 'text-black';
