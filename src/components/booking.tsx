@@ -12,7 +12,7 @@ export default function Booking({ booking }: BookibgProps) {
   const { colorToBookingTypeMapping } = useContext(GlobalContext);
   console.log('Booking_: ', booking);
 
-  const getBackgroundColor = () => {
+  const getBackgroundTextColor = () => {
     // Dynamically assign a color to a type
     let textColor = 'text-white';
     let [colorToBookingType] = colorToBookingTypeMapping.filter((typeMapping) => {
@@ -36,9 +36,17 @@ export default function Booking({ booking }: BookibgProps) {
     return `(${startTime.slice(0, -3)} - ${endTime.slice(0, -3)})`;
   };
 
+  if (!booking.type) {
+    return (
+      <div className={`mt-0.5 ${getBackgroundTextColor()}`} style={{ width: '-webkit-fill-available' }}>
+        <h5 className='whitespace-nowrap'>{booking.name}</h5>
+      </div>
+    );
+  }
+
   return (
     <Popover.Root>
-      <Popover.Trigger className={`mt-0.5 ${getBackgroundColor()}`} style={{ width: '-webkit-fill-available' }}>
+      <Popover.Trigger className={`mt-0.5 ${getBackgroundTextColor()}`} style={{ width: '-webkit-fill-available' }}>
         <h5 className='whitespace-nowrap'>{booking.name}</h5>
       </Popover.Trigger>
       <Popover.Portal>
