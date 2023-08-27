@@ -106,7 +106,7 @@ function App() {
           <Navigation />
           <Filter />
         </div>
-        <div className='col-span-7 grid' style={{ gridTemplateRows: 'auto auto 1fr', overflowY: 'overlay' }}>
+        <div className='col-span-7 grid' style={{ gridTemplateRows: 'auto auto 1fr' }}>
           <CalendarHeader />
           <Calendar />
         </div>
