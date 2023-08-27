@@ -61,9 +61,15 @@ select {
 /* ------------------- */
 .calendar-cell {
   padding: 0.25rem;
-  --tw-border-opacity: 1;
-  border-color: rgb(229 231 235 / var(--tw-border-opacity));
-  border-width: 1px;
+  box-shadow: 0 0 0 1px rgb(229 231 235);
+}
+
+.selected-calendar-cell {
+  box-shadow: 0 0 0 1px rgb(229 231 235);
+}
+
+.shadow-no-color {
+  box-shadow: 0 0 0 1px;
 }
 
 .mx-auto {
@@ -73,6 +79,11 @@ select {
 
 .auto-rows-1fr {
   grid-auto-rows: 1fr;
+}
+
+/* Setting Min Width of containers */
+.min-w-md {
+  min-width: 28rem;
 }
 
 .min-w-screen-md {

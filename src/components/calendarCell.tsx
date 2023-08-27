@@ -24,15 +24,15 @@ export default function CalendarCell({ day }: Props) {
     };
   }
 
-  const getCurrentDayClass = () => {
+  const currentDayClass = () => {
     return day.format('DD-MM-YY') === dayjs().format('DD-MM-YY')
       ? 'bg-green-500 text-white rounded-md w-fit p-0.5 -mt-0.5'
       : '';
   };
   return (
     <>
-      <div className='calendar-cell'>
-        <h5 className={`${getCurrentDayClass()}`}>{day.format('DD')}</h5>
+      <div className='shadow-no-color text-gray-200 p-1'>
+        <h5 className={`${currentDayClass()} text-gray-700`}>{day.format('DD')}</h5>
         <div>
           {bookingsToDisplay.map((booking) => {
             return <Booking booking={booking} />;
